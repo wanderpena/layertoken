@@ -1,0 +1,283 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * LAYERTOKEN FRAMEWORK - LAYOUT SYSTEM
+ * Modern layout utilities using container queries and CSS Grid
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 4: LAYOUT
+   Container queries, Grid, Flexbox utilities
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer layout {
+  
+  /* ─────────────────────────────────────────────────────────────
+     CONTAINER SYSTEM
+     Uses container queries for truly modular components
+     ─────────────────────────────────────────────────────────── */
+  
+  .container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  
+  .container-xs { max-width: var(--container-xs); }
+  .container-sm { max-width: var(--container-sm); }
+  .container-md { max-width: var(--container-md); }
+  .container-lg { max-width: var(--container-lg); }
+  .container-xl { max-width: var(--container-xl); }
+  .container-2xl { max-width: var(--container-2xl); }
+  .container-3xl { max-width: var(--container-3xl); }
+  .container-4xl { max-width: var(--container-4xl); }
+  .container-5xl { max-width: var(--container-5xl); }
+  .container-6xl { max-width: var(--container-6xl); }
+  .container-7xl { max-width: var(--container-7xl); }
+  
+  /* Container Query Context */
+  .cq-container {
+    container-type: inline-size;
+    container-name: component;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     CONSTRAINT-BASED GRID
+     Auto-adaptive grid that responds to content
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Auto-fit Grid - automatically fits as many columns as possible */
+  .grid-auto {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 250px)), 1fr));
+  }
+  
+  /* Auto-fill Grid - fills the row with columns */
+  .grid-auto-fill {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-min, 250px)), 1fr));
+  }
+  
+  /* Responsive Grid Presets */
+  .grid-responsive {
+    display: grid;
+    gap: var(--gap, var(--space-4));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+  
+  .grid-responsive-sm {
+    --grid-min: 200px;
+  }
+  
+  .grid-responsive-md {
+    --grid-min: 300px;
+  }
+  
+  .grid-responsive-lg {
+    --grid-min: 400px;
+  }
+  
+  /* Static Grid Columns */
+  .grid { display: grid; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  
+  /* Grid Gaps */
+  .gap-0 { gap: 0; }
+  .gap-1 { gap: var(--space-1); }
+  .gap-2 { gap: var(--space-2); }
+  .gap-3 { gap: var(--space-3); }
+  .gap-4 { gap: var(--space-4); }
+  .gap-5 { gap: var(--space-5); }
+  .gap-6 { gap: var(--space-6); }
+  .gap-8 { gap: var(--space-8); }
+  .gap-10 { gap: var(--space-10); }
+  .gap-12 { gap: var(--space-12); }
+  
+  /* Column/Row Spans */
+  .col-span-1 { grid-column: span 1 / span 1; }
+  .col-span-2 { grid-column: span 2 / span 2; }
+  .col-span-3 { grid-column: span 3 / span 3; }
+  .col-span-4 { grid-column: span 4 / span 4; }
+  .col-span-6 { grid-column: span 6 / span 6; }
+  .col-span-full { grid-column: 1 / -1; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     FLEXBOX UTILITIES
+     ─────────────────────────────────────────────────────────── */
+  
+  .flex { display: flex; }
+  .flex-inline { display: inline-flex; }
+  
+  /* Direction */
+  .flex-row { flex-direction: row; }
+  .flex-col { flex-direction: column; }
+  .flex-row-reverse { flex-direction: row-reverse; }
+  .flex-col-reverse { flex-direction: column-reverse; }
+  
+  /* Wrap */
+  .flex-wrap { flex-wrap: wrap; }
+  .flex-nowrap { flex-wrap: nowrap; }
+  
+  /* Justify Content */
+  .justify-start { justify-content: flex-start; }
+  .justify-end { justify-content: flex-end; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .justify-around { justify-content: space-around; }
+  .justify-evenly { justify-content: space-evenly; }
+  
+  /* Align Items */
+  .items-start { align-items: flex-start; }
+  .items-end { align-items: flex-end; }
+  .items-center { align-items: center; }
+  .items-baseline { align-items: baseline; }
+  .items-stretch { align-items: stretch; }
+  
+  /* Align Self */
+  .self-start { align-self: flex-start; }
+  .self-end { align-self: flex-end; }
+  .self-center { align-self: center; }
+  .self-stretch { align-self: stretch; }
+  
+  /* Flex Grow/Shrink */
+  .flex-1 { flex: 1 1 0%; }
+  .flex-auto { flex: 1 1 auto; }
+  .flex-initial { flex: 0 1 auto; }
+  .flex-none { flex: none; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     ADVANCED LAYOUT PATTERNS
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Stack Layout - Vertical spacing between children */
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stack > * + * {
+    margin-top: var(--stack-space, var(--space-4));
+  }
+  
+  .stack-sm { --stack-space: var(--space-2); }
+  .stack-md { --stack-space: var(--space-4); }
+  .stack-lg { --stack-space: var(--space-8); }
+  
+  /* Cluster Layout - Horizontal wrapping with consistent gaps */
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-space, var(--space-4));
+    align-items: center;
+  }
+  
+  .cluster-sm { --cluster-space: var(--space-2); }
+  .cluster-md { --cluster-space: var(--space-4); }
+  .cluster-lg { --cluster-space: var(--space-8); }
+  
+  /* Sidebar Layout - Flexible sidebar with main content */
+  .sidebar-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+  
+  .sidebar-layout > :first-child {
+    flex-basis: var(--sidebar-width, 250px);
+    flex-grow: 1;
+  }
+  
+  .sidebar-layout > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--sidebar-min, 50%);
+  }
+  
+  /* Center Layout - Perfect centering */
+  .center {
+    display: grid;
+    place-items: center;
+    min-block-size: 100vh;
+  }
+  
+  .center-inline {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .center-block {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Reel Layout - Horizontal scrolling container */
+  .reel {
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-400) var(--color-neutral-100);
+  }
+  
+  .reel > * {
+    flex: 0 0 auto;
+    max-inline-size: var(--reel-item-width, 300px);
+  }
+  
+  /* Prevent overscroll bounce on mobile */
+  .reel {
+    overscroll-behavior-x: contain;
+  }
+  
+  /* Cover Layout - Fills viewport */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100vh;
+    padding: var(--space-4);
+  }
+  
+  .cover > * {
+    margin-block: var(--space-4);
+  }
+  
+  .cover > :first-child:not(.cover-centered),
+  .cover > :last-child:not(.cover-centered) {
+    margin-block: 0;
+  }
+  
+  .cover > .cover-centered {
+    margin-block: auto;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     RESPONSIVE CONTAINER QUERIES
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Adapt grid based on container width */
+  @container component (min-width: 400px) {
+    .cq-grid-sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @container component (min-width: 600px) {
+    .cq-grid-md {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @container component (min-width: 800px) {
+    .cq-grid-lg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

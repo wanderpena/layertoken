@@ -1,0 +1,336 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * LAYERTOKEN FRAMEWORK - UTILITIES
+ * Atomic utility classes for rapid prototyping
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 6: UTILITIES
+   Single-purpose utility classes (highest specificity in cascade)
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  
+  /* ─────────────────────────────────────────────────────────────
+     SPACING - Margin & Padding
+     Using :where() for zero specificity allows easy overrides
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Margin */
+  :where(.m-0) { margin: 0; }
+  :where(.m-1) { margin: var(--space-1); }
+  :where(.m-2) { margin: var(--space-2); }
+  :where(.m-3) { margin: var(--space-3); }
+  :where(.m-4) { margin: var(--space-4); }
+  :where(.m-5) { margin: var(--space-5); }
+  :where(.m-6) { margin: var(--space-6); }
+  :where(.m-8) { margin: var(--space-8); }
+  :where(.m-auto) { margin: auto; }
+  
+  /* Margin X (horizontal) */
+  :where(.mx-0) { margin-inline: 0; }
+  :where(.mx-1) { margin-inline: var(--space-1); }
+  :where(.mx-2) { margin-inline: var(--space-2); }
+  :where(.mx-3) { margin-inline: var(--space-3); }
+  :where(.mx-4) { margin-inline: var(--space-4); }
+  :where(.mx-6) { margin-inline: var(--space-6); }
+  :where(.mx-8) { margin-inline: var(--space-8); }
+  :where(.mx-auto) { margin-inline: auto; }
+  
+  /* Margin Y (vertical) */
+  :where(.my-0) { margin-block: 0; }
+  :where(.my-1) { margin-block: var(--space-1); }
+  :where(.my-2) { margin-block: var(--space-2); }
+  :where(.my-3) { margin-block: var(--space-3); }
+  :where(.my-4) { margin-block: var(--space-4); }
+  :where(.my-6) { margin-block: var(--space-6); }
+  :where(.my-8) { margin-block: var(--space-8); }
+  
+  /* Margin Top */
+  :where(.mt-0) { margin-top: 0; }
+  :where(.mt-1) { margin-top: var(--space-1); }
+  :where(.mt-2) { margin-top: var(--space-2); }
+  :where(.mt-3) { margin-top: var(--space-3); }
+  :where(.mt-4) { margin-top: var(--space-4); }
+  :where(.mt-6) { margin-top: var(--space-6); }
+  :where(.mt-8) { margin-top: var(--space-8); }
+  :where(.mt-12) { margin-top: var(--space-12); }
+  :where(.mt-16) { margin-top: var(--space-16); }
+  
+  /* Margin Bottom */
+  :where(.mb-0) { margin-bottom: 0; }
+  :where(.mb-1) { margin-bottom: var(--space-1); }
+  :where(.mb-2) { margin-bottom: var(--space-2); }
+  :where(.mb-3) { margin-bottom: var(--space-3); }
+  :where(.mb-4) { margin-bottom: var(--space-4); }
+  :where(.mb-6) { margin-bottom: var(--space-6); }
+  :where(.mb-8) { margin-bottom: var(--space-8); }
+  :where(.mb-12) { margin-bottom: var(--space-12); }
+  
+  /* Padding */
+  :where(.p-0) { padding: 0; }
+  :where(.p-1) { padding: var(--space-1); }
+  :where(.p-2) { padding: var(--space-2); }
+  :where(.p-3) { padding: var(--space-3); }
+  :where(.p-4) { padding: var(--space-4); }
+  :where(.p-5) { padding: var(--space-5); }
+  :where(.p-6) { padding: var(--space-6); }
+  :where(.p-8) { padding: var(--space-8); }
+  :where(.p-10) { padding: var(--space-10); }
+  :where(.p-12) { padding: var(--space-12); }
+  
+  /* Padding X */
+  :where(.px-0) { padding-inline: 0; }
+  :where(.px-2) { padding-inline: var(--space-2); }
+  :where(.px-3) { padding-inline: var(--space-3); }
+  :where(.px-4) { padding-inline: var(--space-4); }
+  :where(.px-6) { padding-inline: var(--space-6); }
+  :where(.px-8) { padding-inline: var(--space-8); }
+  
+  /* Padding Y */
+  :where(.py-0) { padding-block: 0; }
+  :where(.py-2) { padding-block: var(--space-2); }
+  :where(.py-3) { padding-block: var(--space-3); }
+  :where(.py-4) { padding-block: var(--space-4); }
+  :where(.py-6) { padding-block: var(--space-6); }
+  :where(.py-8) { padding-block: var(--space-8); }
+  
+  /* ─────────────────────────────────────────────────────────────
+     TYPOGRAPHY
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Font Sizes */
+  :where(.text-xs) { font-size: var(--text-xs); }
+  :where(.text-sm) { font-size: var(--text-sm); }
+  :where(.text-base) { font-size: var(--text-base); }
+  :where(.text-lg) { font-size: var(--text-lg); }
+  :where(.text-xl) { font-size: var(--text-xl); }
+  :where(.text-2xl) { font-size: var(--text-2xl); }
+  :where(.text-3xl) { font-size: var(--text-3xl); }
+  :where(.text-4xl) { font-size: var(--text-4xl); }
+  :where(.text-5xl) { font-size: var(--text-5xl); }
+  
+  /* Font Weights */
+  :where(.font-light) { font-weight: var(--font-light); }
+  :where(.font-normal) { font-weight: var(--font-normal); }
+  :where(.font-medium) { font-weight: var(--font-medium); }
+  :where(.font-semibold) { font-weight: var(--font-semibold); }
+  :where(.font-bold) { font-weight: var(--font-bold); }
+  
+  /* Text Alignment */
+  :where(.text-left) { text-align: left; }
+  :where(.text-center) { text-align: center; }
+  :where(.text-right) { text-align: right; }
+  :where(.text-justify) { text-align: justify; }
+  
+  /* Text Transform */
+  :where(.uppercase) { text-transform: uppercase; }
+  :where(.lowercase) { text-transform: lowercase; }
+  :where(.capitalize) { text-transform: capitalize; }
+  
+  /* Text Decoration */
+  :where(.underline) { text-decoration: underline; }
+  :where(.line-through) { text-decoration: line-through; }
+  :where(.no-underline) { text-decoration: none; }
+  
+  /* Line Height */
+  :where(.leading-none) { line-height: var(--leading-none); }
+  :where(.leading-tight) { line-height: var(--leading-tight); }
+  :where(.leading-snug) { line-height: var(--leading-snug); }
+  :where(.leading-normal) { line-height: var(--leading-normal); }
+  :where(.leading-relaxed) { line-height: var(--leading-relaxed); }
+  :where(.leading-loose) { line-height: var(--leading-loose); }
+  
+  /* Text Overflow */
+  :where(.truncate) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  :where(.line-clamp-2) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  :where(.line-clamp-3) {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     COLORS
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Text Colors */
+  :where(.text-primary) { color: var(--color-primary); }
+  :where(.text-success) { color: var(--color-success); }
+  :where(.text-warning) { color: var(--color-warning); }
+  :where(.text-error) { color: var(--color-error); }
+  :where(.text-muted) { color: var(--color-neutral-600); }
+  
+  /* Background Colors */
+  :where(.bg-primary) { background-color: var(--color-primary); }
+  :where(.bg-neutral-50) { background-color: var(--color-neutral-50); }
+  :where(.bg-neutral-100) { background-color: var(--color-neutral-100); }
+  :where(.bg-neutral-900) { background-color: var(--color-neutral-900); }
+  :where(.bg-white) { background-color: white; }
+  :where(.bg-transparent) { background-color: transparent; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     BORDERS
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.border) { border: 1px solid var(--surface-border); }
+  :where(.border-0) { border: 0; }
+  :where(.border-t) { border-top: 1px solid var(--surface-border); }
+  :where(.border-b) { border-bottom: 1px solid var(--surface-border); }
+  :where(.border-l) { border-left: 1px solid var(--surface-border); }
+  :where(.border-r) { border-right: 1px solid var(--surface-border); }
+  
+  /* Border Radius */
+  :where(.rounded-none) { border-radius: var(--radius-none); }
+  :where(.rounded-sm) { border-radius: var(--radius-sm); }
+  :where(.rounded) { border-radius: var(--radius-base); }
+  :where(.rounded-md) { border-radius: var(--radius-md); }
+  :where(.rounded-lg) { border-radius: var(--radius-lg); }
+  :where(.rounded-xl) { border-radius: var(--radius-xl); }
+  :where(.rounded-2xl) { border-radius: var(--radius-2xl); }
+  :where(.rounded-full) { border-radius: var(--radius-full); }
+  
+  /* ─────────────────────────────────────────────────────────────
+     SHADOWS
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.shadow-sm) { box-shadow: var(--shadow-sm); }
+  :where(.shadow) { box-shadow: var(--shadow-base); }
+  :where(.shadow-md) { box-shadow: var(--shadow-md); }
+  :where(.shadow-lg) { box-shadow: var(--shadow-lg); }
+  :where(.shadow-xl) { box-shadow: var(--shadow-xl); }
+  :where(.shadow-2xl) { box-shadow: var(--shadow-2xl); }
+  :where(.shadow-none) { box-shadow: none; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     DISPLAY & VISIBILITY
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.block) { display: block; }
+  :where(.inline-block) { display: inline-block; }
+  :where(.inline) { display: inline; }
+  :where(.hidden) { display: none; }
+  
+  :where(.invisible) { visibility: hidden; }
+  :where(.visible) { visibility: visible; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     POSITION
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.static) { position: static; }
+  :where(.relative) { position: relative; }
+  :where(.absolute) { position: absolute; }
+  :where(.fixed) { position: fixed; }
+  :where(.sticky) { position: sticky; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     WIDTH & HEIGHT
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.w-auto) { width: auto; }
+  :where(.w-full) { width: 100%; }
+  :where(.w-screen) { width: 100vw; }
+  :where(.w-min) { width: min-content; }
+  :where(.w-max) { width: max-content; }
+  :where(.w-fit) { width: fit-content; }
+  
+  :where(.h-auto) { height: auto; }
+  :where(.h-full) { height: 100%; }
+  :where(.h-screen) { height: 100vh; }
+  :where(.h-min) { height: min-content; }
+  :where(.h-max) { height: max-content; }
+  
+  :where(.min-h-0) { min-height: 0; }
+  :where(.min-h-full) { min-height: 100%; }
+  :where(.min-h-screen) { min-height: 100vh; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     OVERFLOW
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.overflow-auto) { overflow: auto; }
+  :where(.overflow-hidden) { overflow: hidden; }
+  :where(.overflow-visible) { overflow: visible; }
+  :where(.overflow-scroll) { overflow: scroll; }
+  
+  :where(.overflow-x-auto) { overflow-x: auto; }
+  :where(.overflow-y-auto) { overflow-y: auto; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     Z-INDEX
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.z-0) { z-index: var(--z-base); }
+  :where(.z-10) { z-index: 10; }
+  :where(.z-20) { z-index: 20; }
+  :where(.z-30) { z-index: 30; }
+  :where(.z-40) { z-index: 40; }
+  :where(.z-50) { z-index: 50; }
+  :where(.z-dropdown) { z-index: var(--z-dropdown); }
+  :where(.z-modal) { z-index: var(--z-modal); }
+  :where(.z-tooltip) { z-index: var(--z-tooltip); }
+  
+  /* ─────────────────────────────────────────────────────────────
+     OPACITY
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.opacity-0) { opacity: 0; }
+  :where(.opacity-50) { opacity: 0.5; }
+  :where(.opacity-75) { opacity: 0.75; }
+  :where(.opacity-100) { opacity: 1; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     CURSOR
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.cursor-auto) { cursor: auto; }
+  :where(.cursor-pointer) { cursor: pointer; }
+  :where(.cursor-not-allowed) { cursor: not-allowed; }
+  :where(.cursor-move) { cursor: move; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     USER SELECT
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.select-none) { user-select: none; }
+  :where(.select-text) { user-select: text; }
+  :where(.select-all) { user-select: all; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     POINTER EVENTS
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.pointer-events-none) { pointer-events: none; }
+  :where(.pointer-events-auto) { pointer-events: auto; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     ASPECT RATIO
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.aspect-square) { aspect-ratio: 1 / 1; }
+  :where(.aspect-video) { aspect-ratio: 16 / 9; }
+  :where(.aspect-auto) { aspect-ratio: auto; }
+  
+  /* ─────────────────────────────────────────────────────────────
+     OBJECT FIT
+     ─────────────────────────────────────────────────────────── */
+  
+  :where(.object-contain) { object-fit: contain; }
+  :where(.object-cover) { object-fit: cover; }
+  :where(.object-fill) { object-fit: fill; }
+  :where(.object-none) { object-fit: none; }
+}

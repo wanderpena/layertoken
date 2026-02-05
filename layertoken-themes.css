@@ -1,0 +1,236 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * LAYERTOKEN FRAMEWORK - THEMES
+ * Runtime theming system with dark mode support
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 7: THEMES
+   Theme overrides (highest priority layer)
+   Uses CSS custom properties for runtime theme switching
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer themes {
+  
+  /* ─────────────────────────────────────────────────────────────
+     DARK MODE
+     Automatic dark mode using prefers-color-scheme
+     Can be overridden with [data-theme] attribute
+     ─────────────────────────────────────────────────────────── */
+  
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      /* Inverted Surface Colors */
+      --surface-background: var(--color-neutral-900);
+      --surface-foreground: var(--color-neutral-50);
+      --surface-elevated: var(--color-neutral-800);
+      --surface-border: var(--color-neutral-700);
+      
+      /* Adjust Primary for Darkness */
+      --color-primary-l: 65%;
+      
+      /* Adjust Neutral Grays for Dark */
+      --color-neutral-s: 5%;
+      
+      /* Semantic Color Adjustments */
+      --color-success: hsl(142, 70%, 45%);
+      --color-warning: hsl(38, 85%, 55%);
+      --color-error: hsl(0, 80%, 65%);
+      --color-info: hsl(199, 85%, 55%);
+    }
+  }
+  
+  /* Force Dark Theme */
+  [data-theme="dark"] {
+    color-scheme: dark;
+    
+    --surface-background: var(--color-neutral-900);
+    --surface-foreground: var(--color-neutral-50);
+    --surface-elevated: var(--color-neutral-800);
+    --surface-border: var(--color-neutral-700);
+    
+    --color-primary-l: 65%;
+    --color-neutral-s: 5%;
+    
+    --color-success: hsl(142, 70%, 45%);
+    --color-warning: hsl(38, 85%, 55%);
+    --color-error: hsl(0, 80%, 65%);
+    --color-info: hsl(199, 85%, 55%);
+  }
+  
+  /* Force Light Theme */
+  [data-theme="light"] {
+    color-scheme: light;
+    
+    --surface-background: var(--color-neutral-50);
+    --surface-foreground: var(--color-neutral-900);
+    --surface-elevated: white;
+    --surface-border: var(--color-neutral-200);
+    
+    --color-primary-l: 55%;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     PRESET THEMES
+     Alternative color schemes
+     ─────────────────────────────────────────────────────────── */
+  
+  /* Ocean Theme */
+  [data-theme="ocean"] {
+    --color-primary-h: 200;
+    --color-primary-s: 85%;
+    --color-primary-l: 50%;
+    
+    --color-neutral-h: 200;
+    --color-neutral-s: 15%;
+  }
+  
+  /* Forest Theme */
+  [data-theme="forest"] {
+    --color-primary-h: 142;
+    --color-primary-s: 70%;
+    --color-primary-l: 45%;
+    
+    --color-neutral-h: 142;
+    --color-neutral-s: 12%;
+  }
+  
+  /* Sunset Theme */
+  [data-theme="sunset"] {
+    --color-primary-h: 15;
+    --color-primary-s: 90%;
+    --color-primary-l: 60%;
+    
+    --color-neutral-h: 25;
+    --color-neutral-s: 20%;
+  }
+  
+  /* Purple Theme */
+  [data-theme="purple"] {
+    --color-primary-h: 270;
+    --color-primary-s: 75%;
+    --color-primary-l: 60%;
+    
+    --color-neutral-h: 270;
+    --color-neutral-s: 10%;
+  }
+  
+  /* Monochrome Theme */
+  [data-theme="monochrome"] {
+    --color-primary-h: 0;
+    --color-primary-s: 0%;
+    --color-primary-l: 20%;
+    
+    --color-neutral-h: 0;
+    --color-neutral-s: 0%;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     HIGH CONTRAST MODE
+     Accessibility enhancement
+     ─────────────────────────────────────────────────────────── */
+  
+  @media (prefers-contrast: high) {
+    :root {
+      --surface-border: currentColor;
+      --color-neutral-300: hsl(var(--color-neutral-h), var(--color-neutral-s), 70%);
+      --color-neutral-700: hsl(var(--color-neutral-h), var(--color-neutral-s), 15%);
+    }
+    
+    .btn,
+    .card,
+    .input,
+    .textarea,
+    .select {
+      border-width: 2px;
+    }
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     REDUCED MOTION
+     Accessibility - disable animations for users with motion sensitivity
+     ─────────────────────────────────────────────────────────── */
+  
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* ─────────────────────────────────────────────────────────────
+     CUSTOM THEME BUILDER
+     Use CSS variables to create your own theme
+     ─────────────────────────────────────────────────────────── */
+  
+  /*
+   * Example: Custom Brand Theme
+   * 
+   * [data-theme="my-brand"] {
+   *   --color-primary-h: 330;
+   *   --color-primary-s: 95%;
+   *   --color-primary-l: 55%;
+   *   
+   *   --color-neutral-h: 330;
+   *   --color-neutral-s: 8%;
+   *   
+   *   --font-sans: "YourFont", sans-serif;
+   *   --radius-base: 0;
+   *   --radius-lg: 0;
+   * }
+   */
+  
+  /* ─────────────────────────────────────────────────────────────
+     THEME TRANSITIONS
+     Smooth color transitions when switching themes
+     ─────────────────────────────────────────────────────────── */
+  
+  :root {
+    transition: 
+      background-color var(--transition-base) var(--ease-out),
+      color var(--transition-base) var(--ease-out);
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    * {
+      transition-property: background-color, border-color, color, fill, stroke;
+      transition-timing-function: var(--ease-out);
+      transition-duration: var(--transition-base);
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME UTILITIES
+   Helper classes for theme management
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Theme Toggle Button (optional component) */
+.theme-toggle {
+  padding: var(--space-2);
+  background: var(--surface-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+/* Dark mode specific overrides */
+@media (prefers-color-scheme: dark) {
+  img:not([src*=".svg"]) {
+    opacity: 0.9;
+  }
+  
+  code {
+    background: var(--color-neutral-800);
+  }
+}

@@ -1,0 +1,344 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * LAYERTOKEN FRAMEWORK v1.0
+ * A modern CSS framework combining Design Tokens + Layer Architecture
+ * ═══════════════════════════════════════════════════════════════
+ * 
+ * Philosophy:
+ * - Token-First: Centralized configuration via CSS Custom Properties
+ * - Layer-Based: Predictable specificity via @layer
+ * - Zero-JS: Pure CSS with modern browser features
+ * - Theme-Ready: Runtime theming via CSS variables
+ * - Composable: Import only what you need
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER ARCHITECTURE
+   Order determines cascade priority (later = higher priority)
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer tokens, reset, base, layout, components, utilities, themes;
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 1: DESIGN TOKENS
+   Centralized configuration - modify these to theme entire system
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer tokens {
+  
+  /* Enhanced CSS Properties with type safety */
+  @property --space-unit {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0.25rem;
+  }
+  
+  @property --color-primary-h {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 220;
+  }
+  
+  @property --color-primary-s {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 90%;
+  }
+  
+  @property --color-primary-l {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 55%;
+  }
+  
+  :root {
+    
+    /* ─────────────────────────────────────────────────────────────
+       SPACING SYSTEM - Mathematical progression
+       Based on modular scale (1.25 ratio)
+       ─────────────────────────────────────────────────────────── */
+    --space-unit: 0.25rem; /* 4px base */
+    --space-1: calc(var(--space-unit) * 1);    /* 4px */
+    --space-2: calc(var(--space-unit) * 2);    /* 8px */
+    --space-3: calc(var(--space-unit) * 3);    /* 12px */
+    --space-4: calc(var(--space-unit) * 4);    /* 16px */
+    --space-5: calc(var(--space-unit) * 5);    /* 20px */
+    --space-6: calc(var(--space-unit) * 6);    /* 24px */
+    --space-8: calc(var(--space-unit) * 8);    /* 32px */
+    --space-10: calc(var(--space-unit) * 10);  /* 40px */
+    --space-12: calc(var(--space-unit) * 12);  /* 48px */
+    --space-16: calc(var(--space-unit) * 16);  /* 64px */
+    --space-20: calc(var(--space-unit) * 20);  /* 80px */
+    --space-24: calc(var(--space-unit) * 24);  /* 96px */
+    
+    /* ─────────────────────────────────────────────────────────────
+       COLOR SYSTEM - HSL-based for runtime manipulation
+       Using HSL allows dynamic shade generation
+       ─────────────────────────────────────────────────────────── */
+    
+    /* Primary Color */
+    --color-primary-h: 220;
+    --color-primary-s: 90%;
+    --color-primary-l: 55%;
+    --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+    --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 70%);
+    --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 40%);
+    --color-primary-alpha-10: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.1);
+    --color-primary-alpha-20: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+    
+    /* Neutral Colors */
+    --color-neutral-h: 220;
+    --color-neutral-s: 10%;
+    --color-neutral-50: hsl(var(--color-neutral-h), var(--color-neutral-s), 98%);
+    --color-neutral-100: hsl(var(--color-neutral-h), var(--color-neutral-s), 95%);
+    --color-neutral-200: hsl(var(--color-neutral-h), var(--color-neutral-s), 90%);
+    --color-neutral-300: hsl(var(--color-neutral-h), var(--color-neutral-s), 80%);
+    --color-neutral-400: hsl(var(--color-neutral-h), var(--color-neutral-s), 65%);
+    --color-neutral-500: hsl(var(--color-neutral-h), var(--color-neutral-s), 50%);
+    --color-neutral-600: hsl(var(--color-neutral-h), var(--color-neutral-s), 40%);
+    --color-neutral-700: hsl(var(--color-neutral-h), var(--color-neutral-s), 30%);
+    --color-neutral-800: hsl(var(--color-neutral-h), var(--color-neutral-s), 20%);
+    --color-neutral-900: hsl(var(--color-neutral-h), var(--color-neutral-s), 10%);
+    
+    /* Semantic Colors */
+    --color-success: hsl(142, 76%, 36%);
+    --color-warning: hsl(38, 92%, 50%);
+    --color-error: hsl(0, 84%, 60%);
+    --color-info: hsl(199, 89%, 48%);
+    
+    /* Surface Colors (theme-aware) */
+    --surface-background: var(--color-neutral-50);
+    --surface-foreground: var(--color-neutral-900);
+    --surface-elevated: white;
+    --surface-border: var(--color-neutral-200);
+    
+    /* ─────────────────────────────────────────────────────────────
+       TYPOGRAPHY SYSTEM - Fluid scaling
+       Uses clamp() for responsive sizing without media queries
+       ─────────────────────────────────────────────────────────── */
+    
+    /* Font Families */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+    
+    /* Fluid Type Scale (min, preferred, max) */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
+    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+    --text-3xl: clamp(1.875rem, 1.65rem + 1.125vw, 2.25rem);
+    --text-4xl: clamp(2.25rem, 1.95rem + 1.5vw, 3rem);
+    --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 3.75rem);
+    
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+    
+    /* Font Weights */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* ─────────────────────────────────────────────────────────────
+       LAYOUT TOKENS
+       ─────────────────────────────────────────────────────────── */
+    
+    /* Container Widths */
+    --container-xs: 20rem;   /* 320px */
+    --container-sm: 24rem;   /* 384px */
+    --container-md: 28rem;   /* 448px */
+    --container-lg: 32rem;   /* 512px */
+    --container-xl: 36rem;   /* 576px */
+    --container-2xl: 42rem;  /* 672px */
+    --container-3xl: 48rem;  /* 768px */
+    --container-4xl: 56rem;  /* 896px */
+    --container-5xl: 64rem;  /* 1024px */
+    --container-6xl: 72rem;  /* 1152px */
+    --container-7xl: 80rem;  /* 1280px */
+    
+    /* Border Radius */
+    --radius-none: 0;
+    --radius-sm: 0.125rem;
+    --radius-base: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    
+    /* Z-Index Scale */
+    --z-base: 0;
+    --z-dropdown: 1000;
+    --z-sticky: 1100;
+    --z-fixed: 1200;
+    --z-modal-backdrop: 1300;
+    --z-modal: 1400;
+    --z-popover: 1500;
+    --z-tooltip: 1600;
+    
+    /* Transitions */
+    --transition-fast: 150ms;
+    --transition-base: 250ms;
+    --transition-slow: 350ms;
+    --transition-slower: 500ms;
+    
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 2: RESET
+   Opinionated modern CSS reset
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer reset {
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  body {
+    min-height: 100vh;
+    line-height: var(--leading-normal);
+  }
+  
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+  }
+  
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  ol, ul {
+    list-style: none;
+  }
+  
+  /* Remove default focus styles - you should add your own */
+  :focus {
+    outline: none;
+  }
+  
+  /* Better focus styles */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYER 3: BASE
+   Base element styling with tokens
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--surface-foreground);
+    background-color: var(--surface-background);
+  }
+  
+  /* Typography Elements */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--surface-foreground);
+  }
+  
+  h1 { font-size: var(--text-5xl); }
+  h2 { font-size: var(--text-4xl); }
+  h3 { font-size: var(--text-3xl); }
+  h4 { font-size: var(--text-2xl); }
+  h5 { font-size: var(--text-xl); }
+  h6 { font-size: var(--text-lg); }
+  
+  p {
+    line-height: var(--leading-relaxed);
+  }
+  
+  small {
+    font-size: var(--text-sm);
+  }
+  
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+  
+  code {
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-neutral-100);
+    border-radius: var(--radius-base);
+  }
+  
+  pre {
+    padding: var(--space-4);
+    background: var(--color-neutral-900);
+    color: var(--color-neutral-50);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+  }
+  
+  pre code {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+  }
+  
+  blockquote {
+    padding-left: var(--space-4);
+    border-left: 4px solid var(--color-primary);
+    font-style: italic;
+    color: var(--color-neutral-600);
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid var(--surface-border);
+    margin: var(--space-8) 0;
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "layertoken",
+  "version": "1.0.0",
+  "description": "A modern CSS framework combining Design Tokens + Layer Architecture for predictable, scalable styling",
+  "main": "layertoken.css",
+  "files": [
+    "layertoken.css",
+    "layertoken-core.css",
+    "layertoken-layout.css",
+    "layertoken-components.css",
+    "layertoken-utilities.css",
+    "layertoken-themes.css",
+    "README.md",
+    "ARCHITECTURE.md",
+    "QUICKSTART.md"
+  ],
+  "keywords": [
+    "css",
+    "framework",
+    "design-tokens",
+    "css-layers",
+    "dark-mode",
+    "responsive",
+    "container-queries",
+    "modern-css",
+    "utility-first",
+    "component-library"
+  ],
+  "author": "LayerToken Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wanderpena/layertoken.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wanderpena/layertoken/issues"
+  },
+  "homepage": "https://github.com/wanderpena/layertoken#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "echo 'No build step required - pure CSS'",
+    "dev": "python -m http.server 8000",
+    "test": "echo 'No tests - visual framework'"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
+}
