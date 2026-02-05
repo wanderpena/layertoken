@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LayerToken - A modern CSS framework combining Design Tokens + Layer Architecture for predictable, scalable styling">
+  <meta name="keywords" content="CSS framework, design tokens, CSS layers, dark mode, container queries, modern CSS">
+  <meta name="author" content="Wander Peña">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="LayerToken CSS Framework">
+  <meta property="og:description" content="Modern CSS framework with Design Tokens + Layer Architecture. Zero JavaScript, ~25KB, Built-in Dark Mode.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wanderpena.github.io/layertoken">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LayerToken CSS Framework">
+  <meta name="twitter:description" content="Modern CSS framework with Design Tokens + Layer Architecture">
+  
+  <title>LayerToken - Modern CSS Framework</title>
+  
+  <!-- LayerToken CSS Framework - Using GitHub CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanderpena/layertoken@main/layertoken.css">
+  
+  <!-- Custom styles for landing page -->
+  <style>
+    /* Landing page specific styles */
+    .hero {
+      background: linear-gradient(135deg, 
+        var(--color-primary-alpha-10) 0%, 
+        var(--color-neutral-50) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, var(--color-primary-alpha-10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--color-primary-alpha-10) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-4);
+      display: block;
+    }
+    
+    .code-block {
+      background: var(--color-neutral-900);
+      color: var(--color-neutral-50);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+    }
+    
+    .code-block code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    
+    .stats-card {
+      text-align: center;
+      padding: var(--space-6);
+    }
+    
+    .stats-number {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-bold);
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+    
+    .stats-label {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .theme-demo {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: transform var(--transition-base) var(--ease-out);
+      border: 2px solid transparent;
+    }
+    
+    .theme-demo:hover {
+      transform: scale(1.1);
+      border-color: var(--color-neutral-400);
+    }
+    
+    .theme-demo.active {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-alpha-20);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .hero {
+        background: linear-gradient(135deg, 
+          var(--color-primary-alpha-10) 0%, 
+          var(--color-neutral-900) 100%);
+      }
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-8) 0;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-4);
+      text-align: left;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    
+    .comparison-table th {
+      background: var(--color-neutral-100);
+      font-weight: var(--font-semibold);
+      font-size: var(--text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .comparison-table tr:hover {
+      background: var(--color-neutral-50);
+    }
+    
+    .highlight {
+      background: linear-gradient(120deg, 
+        transparent 0%, 
+        var(--color-primary-alpha-20) 50%, 
+        transparent 100%);
+      padding: 0 var(--space-1);
+      border-radius: var(--radius-base);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- NAVIGATION -->
+  <header style="position: sticky; top: 0; z-index: var(--z-sticky); background: var(--surface-elevated); backdrop-filter: blur(10px); border-bottom: 1px solid var(--surface-border);">
+    <div class="container-7xl">
+      <nav style="padding: var(--space-4) 0;">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div style="width: 2.5rem; height: 2.5rem; background: var(--color-primary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-bold); font-size: var(--text-xl);">
+              L
+            </div>
+            <div>
+              <h1 class="text-xl font-bold" style="margin: 0;">LayerToken</h1>
+              <p class="text-xs text-muted" style="margin: 0;">v1.0.0</p>
+            </div>
+          </div>
+          
+          <div class="nav">
+            <a class="nav-item" href="#features">Features</a>
+            <a class="nav-item" href="#docs">Docs</a>
+            <a class="nav-item" href="#examples">Examples</a>
+            <a class="nav-item" href="https://github.com/wanderpena/layertoken" target="_blank">GitHub</a>
+          </div>
+          
+          <button class="btn btn-icon btn-ghost" onclick="toggleTheme()" title="Toggle theme">
+            <span id="theme-icon">🌙</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container-7xl hero-content">
+      <div style="max-width: 56rem; margin: 0 auto;">
+        <div class="stack stack-lg text-center">
+          <div>
+            <span class="badge badge-primary" style="margin-bottom: var(--space-4);">Modern CSS Framework</span>
+            <h2 class="text-5xl font-bold" style="line-height: var(--leading-tight);">
+              Build Beautiful Interfaces with <span class="highlight">LayerToken</span>
+            </h2>
+          </div>
+          
+          <p class="text-xl text-muted leading-relaxed" style="max-width: 42rem; margin: 0 auto;">
+            A modern CSS framework combining <strong>Design Tokens</strong> + <strong>Layer Architecture</strong> 
+            for predictable, scalable styling. Zero JavaScript, ~25KB, Built-in Dark Mode.
+          </p>
+          
+          <div class="cluster" style="justify-content: center; gap: var(--space-4);">
+            <a href="#quick-start" class="btn btn-primary btn-lg" style="text-decoration: none;">
+              Get Started
+            </a>
+            <a href="https://github.com/wanderpena/layertoken" target="_blank" class="btn btn-secondary btn-lg" style="text-decoration: none;">
+              <span>View on GitHub</span>
+            </a>
+          </div>
+          
+          <div class="code-block" style="text-align: left; margin-top: var(--space-8);">
+            <code>&lt;!-- Install via CDN --&gt;
+&lt;link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/gh/wanderpena/layertoken@main/layertoken.css"&gt;</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- STATS SECTION -->
+  <section style="background: var(--surface-elevated); padding: var(--space-16) 0; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+    <div class="container-7xl">
+      <div class="grid-auto gap-8" style="--grid-min: 200px;">
+        <div class="stats-card">
+          <span class="stats-number">~25KB</span>
+          <span class="stats-label">Minified Size</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-number">0</span>
+          <span class="stats-label">JavaScript</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-number">7</span>
+          <span class="stats-label">CSS Layers</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-number">100+</span>
+          <span class="stats-label">Utilities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FEATURES SECTION -->
+  <section id="features" style="padding: var(--space-20) 0;">
+    <div class="container-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Why LayerToken?</h2>
+        <p class="text-xl text-muted">Modern CSS features with zero build step</p>
+      </div>
+      
+      <div class="grid-auto gap-8" style="--grid-min: 300px;">
+        <div class="card">
+          <span class="feature-icon">🎯</span>
+          <h3 class="text-xl font-semibold mb-3">Token-First Design</h3>
+          <p class="text-muted">
+            Centralized design tokens using CSS Custom Properties. Change your entire theme 
+            by updating a few variables. No compilation needed.
+          </p>
+        </div>
+        
+        <div class="card">
+          <span class="feature-icon">📦</span>
+          <h3 class="text-xl font-semibold mb-3">Layer Architecture</h3>
+          <p class="text-muted">
+            Predictable cascade using CSS <code>@layer</code>. No more specificity wars or 
+            <code>!important</code> hacks. Clean, maintainable code.
+          </p>
+        </div>
+        
+        <div class="card">
+          <span class="feature-icon">🌓</span>
+          <h3 class="text-xl font-semibold mb-3">Dark Mode Built-in</h3>
+          <p class="text-muted">
+            Automatic dark mode detection with manual override. Runtime theme switching 
+            without page reloads. 7 preset themes included.
+          </p>
+        </div>
+        
+        <div class="card">
+          <span class="feature-icon">📱</span>
+          <h3 class="text-xl font-semibold mb-3">Container Queries</h3>
+          <p class="text-muted">
+            Components that respond to their container width, not viewport. 
+            True component encapsulation and reusability.
+          </p>
+        </div>
+        
+        <div class="card">
+          <span class="feature-icon">⚡</span>
+          <h3 class="text-xl font-semibold mb-3">Zero JavaScript</h3>
+          <p class="text-muted">
+            Pure CSS with modern browser features. No build step, no dependencies, 
+            no runtime overhead. Just link and go.
+          </p>
+        </div>
+        
+        <div class="card">
+          <span class="feature-icon">♿</span>
+          <h3 class="text-xl font-semibold mb-3">Accessible</h3>
+          <p class="text-muted">
+            WCAG 2.1 AA compliant. Respects user preferences for reduced motion 
+            and high contrast. Semantic HTML throughout.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- QUICK START SECTION -->
+  <section id="quick-start" style="background: var(--color-neutral-50); padding: var(--space-20) 0;">
+    <div class="container-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Quick Start</h2>
+        <p class="text-xl text-muted">Get up and running in 60 seconds</p>
+      </div>
+      
+      <div class="grid gap-8" style="grid-template-columns: 1fr; max-width: 48rem; margin: 0 auto;">
+        <div class="card">
+          <h3 class="text-xl font-semibold mb-4">1. Include CSS</h3>
+          <div class="code-block">
+            <code>&lt;link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/gh/wanderpena/layertoken@main/layertoken.css"&gt;</code>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-xl font-semibold mb-4">2. Start Building</h3>
+          <div class="code-block">
+            <code>&lt;div class="container-5xl"&gt;
+  &lt;h1 class="text-4xl font-bold"&gt;Hello LayerToken!&lt;/h1&gt;
+  &lt;button class="btn btn-primary"&gt;Get Started&lt;/button&gt;
+&lt;/div&gt;</code>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-xl font-semibold mb-4">3. Customize (Optional)</h3>
+          <div class="code-block">
+            <code>&lt;style&gt;
+  :root {
+    --color-primary-h: 280;  /* Purple */
+    --space-unit: 0.5rem;    /* Larger spacing */
+  }
+&lt;/style&gt;</code>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-8">
+        <a href="QUICKSTART.md" class="btn btn-primary">View Full Quick Start Guide</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- THEME DEMO SECTION -->
+  <section style="padding: var(--space-20) 0;">
+    <div class="container-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Live Theme Switcher</h2>
+        <p class="text-xl text-muted">Click a color to instantly change the entire site theme</p>
+      </div>
+      
+      <div class="card" style="max-width: 48rem; margin: 0 auto;">
+        <div class="cluster" style="justify-content: center; gap: var(--space-4);">
+          <button class="theme-demo" style="background: hsl(220, 90%, 55%);" 
+                  onclick="setTheme('light')" title="Default Blue"></button>
+          <button class="theme-demo" style="background: hsl(200, 85%, 50%);" 
+                  onclick="setTheme('ocean')" title="Ocean"></button>
+          <button class="theme-demo" style="background: hsl(142, 70%, 45%);" 
+                  onclick="setTheme('forest')" title="Forest"></button>
+          <button class="theme-demo" style="background: hsl(15, 90%, 60%);" 
+                  onclick="setTheme('sunset')" title="Sunset"></button>
+          <button class="theme-demo" style="background: hsl(270, 75%, 60%);" 
+                  onclick="setTheme('purple')" title="Purple"></button>
+          <button class="theme-demo" style="background: hsl(0, 0%, 20%);" 
+                  onclick="setTheme('monochrome')" title="Monochrome"></button>
+          <button class="theme-demo" style="background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);" 
+                  onclick="setTheme('dark')" title="Dark Mode"></button>
+        </div>
+        
+        <div class="mt-8 text-center">
+          <p class="text-sm text-muted mb-4">Current theme changes instantly without page reload</p>
+          <div class="cluster" style="justify-content: center;">
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-error">Error</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- COMPARISON SECTION -->
+  <section style="background: var(--surface-elevated); padding: var(--space-20) 0; border-top: 1px solid var(--surface-border);">
+    <div class="container-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">How Does It Compare?</h2>
+        <p class="text-xl text-muted">LayerToken vs other popular CSS frameworks</p>
+      </div>
+      
+      <div class="card" style="overflow-x: auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>LayerToken</th>
+              <th>Tailwind</th>
+              <th>Bootstrap</th>
+              <th>Bulma</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Build Step</td>
+              <td><span class="badge badge-success">None</span></td>
+              <td><span class="badge badge-warning">Required</span></td>
+              <td><span class="badge badge-success">None</span></td>
+              <td><span class="badge badge-success">None</span></td>
+            </tr>
+            <tr>
+              <td>File Size</td>
+              <td><strong>~25KB</strong></td>
+              <td>~80KB+</td>
+              <td>~150KB+</td>
+              <td>~200KB+</td>
+            </tr>
+            <tr>
+              <td>Dark Mode</td>
+              <td><span class="badge badge-success">Built-in</span></td>
+              <td><span class="badge badge-success">Built-in</span></td>
+              <td><span class="badge badge-warning">Manual</span></td>
+              <td><span class="badge badge-warning">Manual</span></td>
+            </tr>
+            <tr>
+              <td>Container Queries</td>
+              <td><span class="badge badge-success">Yes</span></td>
+              <td><span class="badge badge-warning">Plugin</span></td>
+              <td><span class="badge badge-error">No</span></td>
+              <td><span class="badge badge-error">No</span></td>
+            </tr>
+            <tr>
+              <td>CSS Layers</td>
+              <td><span class="badge badge-success">Yes</span></td>
+              <td><span class="badge badge-error">No</span></td>
+              <td><span class="badge badge-error">No</span></td>
+              <td><span class="badge badge-error">No</span></td>
+            </tr>
+            <tr>
+              <td>JavaScript</td>
+              <td><span class="badge badge-success">None</span></td>
+              <td><span class="badge badge-success">None</span></td>
+              <td><span class="badge badge-warning">Required</span></td>
+              <td><span class="badge badge-success">None</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="text-center mt-8">
+        <a href="COMPARISON.md" class="btn btn-secondary">View Detailed Comparison</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- DOCUMENTATION SECTION -->
+  <section id="docs" style="padding: var(--space-20) 0;">
+    <div class="container-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Documentation</h2>
+        <p class="text-xl text-muted">Everything you need to master LayerToken</p>
+      </div>
+      
+      <div class="grid-auto gap-6" style="--grid-min: 280px;">
+        <a href="README.md" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">📖</div>
+          <h3 class="text-xl font-semibold mb-2">README</h3>
+          <p class="text-sm text-muted">
+            Complete documentation with examples, API reference, and usage guidelines.
+          </p>
+        </a>
+        
+        <a href="QUICKSTART.md" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">⚡</div>
+          <h3 class="text-xl font-semibold mb-2">Quick Start</h3>
+          <p class="text-sm text-muted">
+            Get up and running in 5 minutes with step-by-step installation guide.
+          </p>
+        </a>
+        
+        <a href="ARCHITECTURE.md" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">🏗️</div>
+          <h3 class="text-xl font-semibold mb-2">Architecture</h3>
+          <p class="text-sm text-muted">
+            Deep dive into the technical design, layer system, and token architecture.
+          </p>
+        </a>
+        
+        <a href="COMPARISON.md" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">📊</div>
+          <h3 class="text-xl font-semibold mb-2">Comparison</h3>
+          <p class="text-sm text-muted">
+            How LayerToken compares to Tailwind, Bootstrap, Bulma, and other frameworks.
+          </p>
+        </a>
+        
+        <a href="example.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">🎨</div>
+          <h3 class="text-xl font-semibold mb-2">Examples</h3>
+          <p class="text-sm text-muted">
+            Live examples of all components, utilities, and layout patterns.
+          </p>
+        </a>
+        
+        <a href="starter.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+          <div class="text-3xl mb-3">🚀</div>
+          <h3 class="text-xl font-semibold mb-2">Starter Template</h3>
+          <p class="text-sm text-muted">
+            Minimal HTML template to kickstart your next project.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- GITHUB SECTION -->
+  <section style="background: var(--color-neutral-50); padding: var(--space-20) 0;">
+    <div class="container-6xl">
+      <div class="card" style="text-align: center;">
+        <h2 class="text-3xl font-bold mb-4">Open Source</h2>
+        <p class="text-lg text-muted mb-8">
+          LayerToken is completely open source and free to use. 
+          Contributions, issues, and feedback are welcome!
+        </p>
+        
+        <div class="cluster" style="justify-content: center; gap: var(--space-4); margin-bottom: var(--space-8);">
+          <a href="https://github.com/wanderpena/layertoken" target="_blank" class="btn btn-primary" style="text-decoration: none;">
+            View on GitHub
+          </a>
+          <a href="https://github.com/wanderpena/layertoken/issues" target="_blank" class="btn btn-secondary" style="text-decoration: none;">
+            Report Issue
+          </a>
+          <a href="https://github.com/wanderpena/layertoken/fork" target="_blank" class="btn btn-ghost" style="text-decoration: none;">
+            Fork Repository
+          </a>
+        </div>
+        
+        <div class="code-block" style="max-width: 32rem; margin: 0 auto; text-align: left;">
+          <code># Clone the repository
+git clone https://github.com/wanderpena/layertoken.git
+
+# Or download via npm (coming soon)
+npm install layertoken</code>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer style="background: var(--surface-elevated); border-top: 1px solid var(--surface-border); padding: var(--space-12) 0;">
+    <div class="container-7xl">
+      <div class="grid gap-8" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div>
+          <h3 class="font-semibold mb-4">LayerToken</h3>
+          <p class="text-sm text-muted mb-4">
+            Modern CSS framework with Design Tokens + Layer Architecture. 
+            Built with ❤️ by Wander Peña.
+          </p>
+          <div class="cluster cluster-sm">
+            <a href="https://github.com/wanderpena" class="text-sm text-muted" target="_blank">GitHub</a>
+            <a href="https://twitter.com/wanderpena" class="text-sm text-muted" target="_blank">Twitter</a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Documentation</h3>
+          <nav class="nav nav-vertical">
+            <a class="nav-item" href="README.md">README</a>
+            <a class="nav-item" href="QUICKSTART.md">Quick Start</a>
+            <a class="nav-item" href="ARCHITECTURE.md">Architecture</a>
+            <a class="nav-item" href="COMPARISON.md">Comparison</a>
+          </nav>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Resources</h3>
+          <nav class="nav nav-vertical">
+            <a class="nav-item" href="example.html">Examples</a>
+            <a class="nav-item" href="starter.html">Starter Template</a>
+            <a class="nav-item" href="https://github.com/wanderpena/layertoken">GitHub</a>
+            <a class="nav-item" href="https://github.com/wanderpena/layertoken/issues">Issues</a>
+          </nav>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold mb-4">Installation</h3>
+          <div class="code-block" style="font-size: 0.75rem; padding: var(--space-3);">
+            <code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanderpena/layertoken@main/layertoken.css"&gt;</code>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--surface-border); text-align: center;">
+        <p class="text-sm text-muted">
+          © 2026 LayerToken. Released under the MIT License.
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- THEME SWITCHER SCRIPT -->
+  <script>
+    // Theme management
+    let currentTheme = 'light';
+    
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeIcon();
+      updateActiveTheme();
+    }
+    
+    function toggleTheme() {
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    }
+    
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (currentTheme === 'dark') {
+        icon.textContent = '☀️';
+      } else {
+        icon.textContent = '🌙';
+      }
+    }
+    
+    function updateActiveTheme() {
+      document.querySelectorAll('.theme-demo').forEach(btn => {
+        btn.classList.remove('active');
+      });
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      // Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    }
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
